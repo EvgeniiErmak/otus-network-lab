@@ -1,9 +1,106 @@
 ---
-# Этап 3: проверка доступности всех хостов (на этапе 4 playbook будет заменён полной настройкой)
-- name: Check connectivity
+- name: OTUS network lab - routing, NAT, forwarding
   hosts: all
   become: true
   gather_facts: false
+
   tasks:
-    - name: ping
-      ansible.builtin.ping:
+    # ---------- inetRouter: NAT ----------
+    - name: Disable ufw on inetRouter
+      ansible.builtin.systemd:
+        name: ufw
+        state: stopped
+        enabled: false
+      when: inventory_hostname == "inetRouter"
+
+    - name: Create directory for if-pre-up scripts
+      ansible.builtin.file:
+        path: /etc/network/if-pre-up.d
+        state: directory
+        mode: "0755"
+      when: inventory_hostname == "inetRouter"
+
+    - name: Set up NAT on inetRouter
+      ansible.builtin.template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: "{{ item.mode }}"
+      with_items:
+        - { src: "iptables_rules.ipv4",      dest: "/etc/iptables_rules.ipv4",                    mode: "0644" }
+        - { src: "iptables_restore",         dest: "/etc/network/if-pre-up.d/iptables",           mode: "0755" }
+        - { src: "iptables-restore.service", dest: "/etc/systemd/system/iptables-restore.service", mode: "0644" }
+      when: inventory_hostname == "inetRouter"
+
+    - name: Enable iptables-restore service on inetRouter
+      ansible.builtin.systemd:
+        name: iptables-restore
+        enabled: true
+        state: started
+        daemon_reload: true
+      when: inventory_hostname == "inetRouter"
+
+    # ---------- routers: IP forward ----------
+    - name: Set up forward packages across routers
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/90-ip-forward.conf
+        content: "net.ipv4.conf.all.forwarding = 1\n"
+        owner: root
+        group: root
+        mode: "0644"
+      when: "'routers' in group_names"
+
+    - name: Apply sysctl on routers
+      ansible.builtin.command: sysctl -p /etc/sysctl.d/90-ip-forward.conf
+      changed_when: false
+      when: "'routers' in group_names"
+
+    # ---------- DNS (systemd-resolved) ----------
+    - name: Create systemd-resolved drop-in directory
+      ansible.builtin.file:
+        path: /etc/systemd/resolved.conf.d
+        state: directory
+        mode: "0755"
+
+    - name: Configure systemd-resolved (global DNS, DNSSEC off)
+      ansible.builtin.template:
+        src: resolved-lab.conf
+        dest: /etc/systemd/resolved.conf.d/lab.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    # ---------- disable default route on eth0 ----------
+    - name: Disable default route via eth0 (Vagrant NAT)
+      ansible.builtin.template:
+        src: 00-installer-config.yaml
+        dest: "{{ item }}"
+        owner: root
+        group: root
+        mode: "0600"
+      with_items:
+        - /etc/netplan/00-installer-config.yaml
+        - /etc/netplan/01-netcfg.yaml
+      when: inventory_hostname != "inetRouter"
+
+    # ---------- addresses and static routes ----------
+    - name: Add addresses and static routes (netplan)
+      ansible.builtin.template:
+        src: "50-vagrant_{{ inventory_hostname }}.yaml"
+        dest: /etc/netplan/50-vagrant.yaml
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: Restart all hosts
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+
+    # ---------- check: Internet via inetRouter ----------
+    - name: Install traceroute (apt goes to Internet via inetRouter)
+      ansible.builtin.apt:
+        name: traceroute
+        state: present
+        update_cache: true
+        lock_timeout: 300

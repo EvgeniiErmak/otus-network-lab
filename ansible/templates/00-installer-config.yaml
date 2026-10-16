@@ -1,0 +1,15 @@
+# eth0 - служебный NAT-интерфейс Vagrant.
+# Маршрут по умолчанию и DNS от DHCP отключены: интернет идёт через inetRouter.
+# DNS задаётся глобально в systemd-resolved (resolved-lab.conf).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+      dhcp4-overrides:
+        use-routes: false
+        use-dns: false
+      dhcp6: false
+      accept-ra: false
+      optional: true

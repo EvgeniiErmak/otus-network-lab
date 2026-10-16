@@ -1,0 +1,12 @@
+[Unit]
+Description=Restore iptables NAT rules (inetRouter)
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iptables-restore /etc/iptables_rules.ipv4
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
