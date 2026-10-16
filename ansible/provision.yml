@@ -1,0 +1,9 @@
+---
+# Этап 3: проверка доступности всех хостов (на этапе 4 playbook будет заменён полной настройкой)
+- name: Check connectivity
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
