@@ -1,0 +1,91 @@
+Netmask:   255.255.255.240 = 28 
+Network:   192.168.0.0/28       
+HostMin:   192.168.0.1          
+HostMax:   192.168.0.14         
+Broadcast: 192.168.0.15         
+Hosts/Net: 14                    Class C, Private Internet
+-----
+Netmask:   255.255.255.240 = 28 
+Network:   192.168.0.32/28      
+HostMin:   192.168.0.33         
+HostMax:   192.168.0.46         
+Broadcast: 192.168.0.47         
+Hosts/Net: 14                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.0.64/26      
+HostMin:   192.168.0.65         
+HostMax:   192.168.0.126        
+Broadcast: 192.168.0.127        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.2.0/26       
+HostMin:   192.168.2.1          
+HostMax:   192.168.2.62         
+Broadcast: 192.168.2.63         
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.2.64/26      
+HostMin:   192.168.2.65         
+HostMax:   192.168.2.126        
+Broadcast: 192.168.2.127        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.2.128/26     
+HostMin:   192.168.2.129        
+HostMax:   192.168.2.190        
+Broadcast: 192.168.2.191        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.2.192/26     
+HostMin:   192.168.2.193        
+HostMax:   192.168.2.254        
+Broadcast: 192.168.2.255        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.128 = 25 
+Network:   192.168.1.0/25       
+HostMin:   192.168.1.1          
+HostMax:   192.168.1.126        
+Broadcast: 192.168.1.127        
+Hosts/Net: 126                   Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.1.128/26     
+HostMin:   192.168.1.129        
+HostMax:   192.168.1.190        
+Broadcast: 192.168.1.191        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.192 = 26 
+Network:   192.168.1.192/26     
+HostMin:   192.168.1.193        
+HostMax:   192.168.1.254        
+Broadcast: 192.168.1.255        
+Hosts/Net: 62                    Class C, Private Internet
+-----
+Netmask:   255.255.255.252 = 30 
+Network:   192.168.255.0/30     
+HostMin:   192.168.255.1        
+HostMax:   192.168.255.2        
+Broadcast: 192.168.255.3        
+Hosts/Net: 2                     Class C, Private Internet
+-----
+Netmask:   255.255.255.252 = 30 
+Network:   192.168.255.4/30     
+HostMin:   192.168.255.5        
+HostMax:   192.168.255.6        
+Broadcast: 192.168.255.7        
+Hosts/Net: 2                     Class C, Private Internet
+-----
+Netmask:   255.255.255.252 = 30 
+Network:   192.168.255.8/30     
+HostMin:   192.168.255.9        
+HostMax:   192.168.255.10       
+Broadcast: 192.168.255.11       
+Hosts/Net: 2                     Class C, Private Internet
+-----
