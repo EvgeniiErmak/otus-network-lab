@@ -1,0 +1,56 @@
+centralServer  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+inetRouter  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+office2Router  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+centralRouter  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+office1Router  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+office2Server  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
+office1Server  ->
+inetRouter     192.168.255.1   OK
+centralRouter  192.168.0.1     OK
+centralServer  192.168.0.2     OK
+office1Router  192.168.2.129   OK
+office1Server  192.168.2.130   OK
+office2Router  192.168.1.1     OK
+office2Server  192.168.1.2     OK
